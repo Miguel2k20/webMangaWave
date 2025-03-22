@@ -30,59 +30,62 @@ export default {
 
 <style>
 #home {
-    display: flex;
-    justify-content: center;
-    padding-top: 5%;
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
 }
 
 #home .session .imagem {
-    display: block;
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
+  display: block;
+  max-width: 50%;
+  margin: 0 auto;
 }
 #home .session .imagem img {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 #home .session .title {
-    font-size: 45px;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
 }
 #home .session .title span {
-    color: #dc5d51;
+  color: #dc5d51;
 }
 #home .session form {
-    margin-top: 5%;
-    position: relative;
+  margin-top: 5%;
+  position: relative;
 }
 #home .session form input {
-    width: calc(100% - 52px);
-    max-width: 950px;
-    font-size: 20px;
-    padding: 15px 25px;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    outline: none;
+  width: calc(100% - 52px);
+  max-width: 950px;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  padding: 15px 25px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+  background: #f1efe3;
+  color: #555;
 }
 #home .session form button {
-    position: absolute;
-    right: 1px;
-    top: 1px;
-    border-radius: 10px;
-    width: 60px;
-    height: calc(100% - 2px);
-    border: none;
-    outline: none;
-    font-size: 15px;
-    cursor: pointer;
-    background: #f5f5f5;
-    transition: all 0.5s ease;
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  border-radius: 10px;
+  width: 60px;
+  height: calc(100% - 2px);
+  border: none;
+  outline: none;
+  font-size: 15px;
+  cursor: pointer;
+  background: #f5f5f5;
+  transition: all 0.5s ease;
+  background: #f1efe3;
+  color: #555;
 }
 #home .session form button:hover {
-    background:#dc5d51;
-    color: #fff; 
+  background:#dc5d51;
+  color: #fff; 
 }
 </style>

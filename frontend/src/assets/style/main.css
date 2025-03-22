@@ -5,10 +5,12 @@ html {
     font-style: normal;
     font-variation-settings: "wdth" 100;
     color: #555;
+    background: #f1efe3;
 }
 .content {
     display: block;
-    width: 100%;
+    width: calc(100% - 30px);
     max-width: 1440px;
     margin: 0 auto;
+    padding: 0 15px;
 }
