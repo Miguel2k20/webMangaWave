@@ -4,6 +4,11 @@ html {
     font-weight: regular;
     font-style: normal;
     font-variation-settings: "wdth" 100;
-    background: #212121;
-    color: #fff;
+    color: #555;
+}
+.content {
+    display: block;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
 }
