@@ -12,6 +12,11 @@
                 placeholder="O que você está procurando?">
                 <button> <span class="pi pi-search"></span></button>
         </form>
+        <div class="links">
+          <a href="" class="default-button">
+            Sobre Nós
+          </a>
+        </div>
       </div>
     </div>
 </template>
@@ -87,5 +92,10 @@ export default {
 #home .session form button:hover {
   background:#dc5d51;
   color: #fff; 
+}
+#home .links {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
 }
 </style>
