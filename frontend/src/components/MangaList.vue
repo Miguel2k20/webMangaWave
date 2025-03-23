@@ -14,10 +14,21 @@
         props: {
             list: Array
         },
+        data() {
+            return {
+                listManga: []
+            }
+        },
         components: {
             MangaItem
         },
         mounted() {
+            this.listManga = this.list
+        },
+        watch: {
+            list: function (newList) {
+                this.listManga = newList
+            }
         }
     }
 </script>

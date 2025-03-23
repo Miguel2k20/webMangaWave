@@ -4,9 +4,9 @@
       <div class="logo">
         <img src="../assets/imagens/logo.png" alt="">
       </div>
-      <form action="" class="form-space">
+      <form action="" class="form-space" @submit.prevent="searchNew">
         <input v-model="formData.name" placeholder="O que você está procurando" type="text">
-        <button>
+        <button type="submit">
           <span class="pi pi-search"></span>
         </button>
       </form>
@@ -52,6 +52,15 @@ export default {
     this.searchMangas()
   },
   methods: {
+    searchNew() {
+      if (this.formData.name && this.formData.name != this.actualTitle) { 
+        this.$router.push({
+          path: '/search-mangas',
+          query: { manga: this.formData.name }
+        });
+        this.searchMangas()
+      }
+    },
     async searchMangas() {
       if(this.formData.name){
         try {
@@ -63,6 +72,7 @@ export default {
           });
           this.mangaList =  Object.entries(response.data.data)
           this.resultCount = response.data.total
+          this.actualTitle = this.formData.name
         } catch (error) {
           console.error(error);
         }
