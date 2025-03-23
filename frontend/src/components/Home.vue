@@ -1,36 +1,47 @@
 <template>
-    <div class="content" id="home">
-      <div class="session">
-        <div class="imagem">
-          <img alt="Vue logo" src="./../assets/imagens/logo.png">
-        </div>
-        <h1 class="title">Bem vindo ao <span>mangaWave</span></h1>
-        <form class="form">
-            <input 
-                type="text"
-                v-model="form.name"
-                placeholder="O que você está procurando?">
-                <button> <span class="pi pi-search"></span></button>
-        </form>
-        <div class="links">
-          <a href="about-us" class="default-button">
-            Sobre Nós
-          </a>
-        </div>
+  <div class="content" id="home">
+    <div class="session">
+      <div class="imagem">
+        <img alt="Vue logo" src="./../assets/imagens/logo.png">
+      </div>
+      <h1 class="title">Bem vindo ao <span>mangaWave</span></h1>
+      <form class="form" @submit.prevent="search">
+        <input 
+          type="text"
+          v-model="form.name"
+          placeholder="O que você está procurando?">
+        <button type="submit">
+          <span class="pi pi-search"></span>
+        </button>
+      </form>
+      <div class="links">
+        <a href="about-us" class="default-button">Sobre Nós</a>
       </div>
     </div>
+  </div>
 </template>
+
 <script>
 export default {
   name: 'HomeApp',
   data() {
     return {
       form: {
-        name: ""
-      } 
+        name: ''
+      }
+    };
+  },
+  methods: {
+    search() {
+      if (this.form.name) { 
+        this.$router.push({
+          path: '/search-mangas',
+          query: { manga: this.form.name }
+        });
+      }
     }
   }
-}
+};
 </script>
 
 <style>

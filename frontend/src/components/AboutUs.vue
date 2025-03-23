@@ -60,12 +60,12 @@ export default {
 </script>
 
 <style>
-.about-me {
+#about-us .about-me {
   display: flex;
   width: 100%;
   padding-top: 5%;
 }
-.about-me .imagem {
+#about-us .about-me .imagem {
   width: 20%;
   max-width: 300px;
   max-height: 300px;
@@ -73,37 +73,37 @@ export default {
   overflow: hidden;
   border-radius: 10px;
 }
-.about-me .imagem img {
+#about-us .about-me .imagem img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-.about-me .info {
+#about-us .about-me .info {
   padding-left: 2rem;
   flex: 1;
 }
-.about-me .info .item {
+#about-us .about-me .info .item {
   margin-bottom: 2%;
 }
-.about-me .info .item .title {
+#about-us .about-me .info .item .title {
   font-size: clamp(1.8rem, 5vw, 2.5rem);
   font-weight: bold;
 }
-.about-me .info .item .title span {
+#about-us .about-me .info .item .title span {
   color: #dc5d51;
 }
-.about-me .info .item .text {
+#about-us .about-me .info .item .text {
   margin-top: 1%;
   text-align: justify;
   line-height: 1.5rem;
   font-size: clamp(0.8rem, 5vw, 1rem);
 }
-.about-me .info .item .links {
+#about-us .about-me .info .item .links {
   margin-top: 1rem;
   display: flex;
 }
-.about-me .info .item .links a {
+#about-us .about-me .info .item .links a {
   display: block;
   margin-right: 1rem;
   color: #555;
@@ -114,21 +114,21 @@ export default {
   border-radius: 10px;
   transition: all 0.5s ease;
 }
-.about-me .info .item .links a:hover {
+#about-us .about-me .info .item .links a:hover {
   color: #fff;
   background: #dc5d51;
   border: #dc5d51 1px solid;
 }
-.about-me .info .item .list {
+#about-us .about-me .info .item .list {
   margin-top: 1rem;
   list-style: circle;
   padding-left: 20px;
 }
-.about-me .info .item .list li {
+#about-us .about-me .info .item .list li {
   margin-bottom: 5px;
   font-size: clamp(0.8rem, 5vw, 1rem);
 }
-.about-me .info .item .list li a {
+#about-us .about-me .info .item .list li a {
   color: #555;
 }
 @media (max-width: 960px) {
