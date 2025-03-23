@@ -14,11 +14,14 @@ def home():
 @app.route('/get-mangas')
 def getManga():
     manga = request.args.get('manga')
+    offset = request.args.get('offset')
+    
     if not manga:
         return {"error": "Mangá não especificado"}, 404
     
-    result = MangaApiClient.getManga(manga)
+    result = MangaApiClient.getManga(manga, offset)
     return jsonify(result)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+    

@@ -17,16 +17,22 @@
         <h4 class="sub-title">{{ resultCount }} resultados encontrados</h4>
       </div>
     </div>
-
+    <div class="session manga-list">
+      <MangaList :list="mangaList" />
+    </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
+import MangaList from '../components/MangaList.vue';
 
 export default {
   name: 'SearchMangas',
   props: {
     mangaName: String
+  },
+  components: {
+    MangaList
   },
   data() {
     return {
@@ -34,7 +40,8 @@ export default {
         name: ""
       },
       actualTitle: "",
-      resultCount: 0
+      resultCount: 0,
+      mangaList: [],
     }
   },
   mounted() {
@@ -50,14 +57,15 @@ export default {
         try {
           const response = await axios.get('http://localhost:5000/get-mangas', {
             params:{
-              manga: this.formData.name
+              manga: this.formData.name,
+              offset: 0,
             }
           });
-          console.log([response, "xereca"])
-          // console.log(response.data);
+          this.mangaList = response.data.data
+          this.resultCount = response.data.total
+          console.log(response)
         } catch (error) {
-          console.log("puta que")
-          // console.error(error);
+          console.error(error);
         }
       }
     }

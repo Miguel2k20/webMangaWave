@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../components/Home.vue';
-import About from '../components/AboutUs.vue';
-import SearchMangas from '../components/SearchMangas.vue'
+import Home from '../sessions/Home.vue';
+import About from '../sessions/AboutUs.vue';
+import SearchMangas from '../sessions/SearchMangas.vue'
 
 // Define as rotas
 const routes = [
