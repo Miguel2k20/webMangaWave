@@ -5,7 +5,7 @@
           <img src="../assets/imagens/photoProfile.jpeg" alt="">
         </div>
         <div class="info">
-          <div class="item">
+          <div class="item-about-us">
             <h1 class="title"><span>O</span>lá eu me chamo Miguel</h1>
             <p class="text">
               Sou desenvolvedor do MangaWave e atuo como programador há {{ year }} anos, 
@@ -17,7 +17,7 @@
               permitindo explorar diferentes desafios e encontrar soluções inovadoras.
             </p>
           </div>
-          <div class="item">
+          <div class="item-about-us">
             <h1 class="title"><span>M</span>inhas redes sociais</h1>
             <div class="links">
               <a href="https://www.linkedin.com/in/jo%C3%A3o-miguel-mendon%C3%A7a-665334187/" target="_blank">
@@ -31,7 +31,7 @@
               </a>
             </div>
           </div>
-          <div class="item">
+          <div class="item-about-us">
             <h1 class="title"><span>T</span>ecnologias usadas nesse projeto</h1>
             <ul class="list">
               <li>Node 16</li>
@@ -83,27 +83,27 @@ export default {
   padding-left: 2rem;
   flex: 1;
 }
-#about-us .about-me .info .item {
+#about-us .about-me .info .item-about-us {
   margin-bottom: 2%;
 }
-#about-us .about-me .info .item .title {
+#about-us .about-me .info .item-about-us .title {
   font-size: clamp(1.8rem, 5vw, 2.5rem);
   font-weight: bold;
 }
-#about-us .about-me .info .item .title span {
+#about-us .about-me .info .item-about-us .title span {
   color: #dc5d51;
 }
-#about-us .about-me .info .item .text {
+#about-us .about-me .info .item-about-us .text {
   margin-top: 1%;
   text-align: justify;
   line-height: 1.5rem;
   font-size: clamp(0.8rem, 5vw, 1rem);
 }
-#about-us .about-me .info .item .links {
+#about-us .about-me .info .item-about-us .links {
   margin-top: 1rem;
   display: flex;
 }
-#about-us .about-me .info .item .links a {
+#about-us .about-me .info .item-about-us .links a {
   display: block;
   margin-right: 1rem;
   color: #555;
@@ -114,21 +114,21 @@ export default {
   border-radius: 10px;
   transition: all 0.5s ease;
 }
-#about-us .about-me .info .item .links a:hover {
+#about-us .about-me .info .item-about-us .links a:hover {
   color: #fff;
   background: #dc5d51;
   border: #dc5d51 1px solid;
 }
-#about-us .about-me .info .item .list {
+#about-us .about-me .info .item-about-us .list {
   margin-top: 1rem;
   list-style: circle;
   padding-left: 20px;
 }
-#about-us .about-me .info .item .list li {
+#about-us .about-me .info .item-about-us .list li {
   margin-bottom: 5px;
   font-size: clamp(0.8rem, 5vw, 1rem);
 }
-#about-us .about-me .info .item .list li a {
+#about-us .about-me .info .item-about-us .list li a {
   color: #555;
 }
 @media (max-width: 960px) {
