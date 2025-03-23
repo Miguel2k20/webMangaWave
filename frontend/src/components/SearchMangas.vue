@@ -21,6 +21,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   name: 'SearchMangas',
   props: {
@@ -39,6 +41,25 @@ export default {
     if (this.mangaName) {
       this.formData.name = this.mangaName;
       this.actualTitle = this.mangaName;
+    }
+    this.searchMangas()
+  },
+  methods: {
+    async searchMangas() {
+      if(this.formData.name){
+        try {
+          const response = await axios.get('http://localhost:5000/get-mangas', {
+            params:{
+              manga: this.formData.name
+            }
+          });
+          console.log([response, "xereca"])
+          // console.log(response.data);
+        } catch (error) {
+          console.log("puta que")
+          // console.error(error);
+        }
+      }
     }
   }
 }
