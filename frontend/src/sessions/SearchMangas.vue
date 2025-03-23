@@ -61,9 +61,8 @@ export default {
               offset: 0,
             }
           });
-          this.mangaList = response.data.data
+          this.mangaList =  Object.entries(response.data.data)
           this.resultCount = response.data.total
-          console.log(response)
         } catch (error) {
           console.error(error);
         }
