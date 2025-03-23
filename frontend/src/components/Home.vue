@@ -13,7 +13,7 @@
                 <button> <span class="pi pi-search"></span></button>
         </form>
         <div class="links">
-          <a href="" class="default-button">
+          <a href="about-us" class="default-button">
             Sobre Nós
           </a>
         </div>
@@ -22,7 +22,7 @@
 </template>
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'HomeApp',
   data() {
     return {
       form: {

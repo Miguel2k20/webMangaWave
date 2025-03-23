@@ -1,7 +1,9 @@
 <template>
     <div id="footer">
       <span>
-        © {{ year }} Miguel. Todos os direitos reservados. Este projeto utiliza a API do <a href="https://api.mangadex.org/docs/">MangaDex</a>, mas não é afiliado ou endossado por eles.
+        © {{ year }} Miguel. Todos os direitos reservados. Este projeto utiliza a API do 
+        <a href="https://api.mangadex.org/docs/"  target="_blank">MangaDex</a>, mas não é 
+        afiliado ou endossado por eles.
       </span>
     </div>
 </template>
@@ -25,6 +27,7 @@ export default {
   padding: 25px 15px;
   max-height: 65px;
   text-align: center;
+  margin-top: 5%;
 }
 #footer a {
   color: #fff;
