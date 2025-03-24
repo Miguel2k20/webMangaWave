@@ -22,6 +22,17 @@ def getManga():
     result = MangaApiClient.getManga(manga, offset)
     return jsonify(result)
 
+@app.route('/get-manga-chapters')
+def getMangaChapters():
+    idManga = request.args.get('idManga')
+    offset = request.args.get('offset')
+    
+    if not idManga:
+        return {"error": "Mangá não especificado"}, 404
+    
+    result = MangaApiClient.getMangaList(idManga, offset)
+    return jsonify(result)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
     

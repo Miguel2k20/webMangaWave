@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../sessions/Home.vue';
 import About from '../sessions/AboutUs.vue';
 import SearchMangas from '../sessions/SearchMangas.vue'
+import MangaInfo from '@/sessions/MangaInfo.vue';
 
-// Define as rotas
 const routes = [
   {
     path: '/',
@@ -20,6 +20,12 @@ const routes = [
     name: 'SearchMangas',
     component: SearchMangas,
     props: route => ({ mangaName: route.query.manga })
+  },
+  {
+    path: '/info-mangas',
+    name: 'MangaInfo',
+    component: MangaInfo,
+    props: route => ({ mangaId: route.query.id })
   }
 ];
 
