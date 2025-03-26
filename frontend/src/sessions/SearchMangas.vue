@@ -1,8 +1,11 @@
 <template>
   <div class="content" id="search-mangas">
+    <SpinnerMain :show="showSpinner" text="Buscando o manga..."/>
     <div class="session search">
       <div class="logo">
-        <img src="../assets/imagens/logo.png" alt="">
+        <a href="/">
+          <img src="../assets/imagens/logo.png" alt="">
+        </a>
       </div>
       <form action="" class="form-space" @submit.prevent="searchNew">
         <input v-model="formData.name" placeholder="O que você está procurando" type="text">
@@ -25,14 +28,15 @@
 <script>
 import axios from 'axios'
 import MangaList from '../components/MangaList.vue';
-
+import SpinnerMain from '@/components/SpinnerMain.vue';
 export default {
   name: 'SearchMangas',
   props: {
     mangaName: String
   },
   components: {
-    MangaList
+    MangaList,
+    SpinnerMain
   },
   data() {
     return {
@@ -42,14 +46,18 @@ export default {
       actualTitle: "",
       resultCount: 0,
       mangaList: [],
+      showSpinner: false
     }
   },
-  mounted() {
+  created() {
     if (this.mangaName) {
       this.formData.name = this.mangaName;
       this.actualTitle = this.mangaName;
     }
     this.searchMangas()
+  },
+  mounted() {
+
   },
   methods: {
     searchNew() {
@@ -63,6 +71,7 @@ export default {
     },
     async searchMangas() {
       if(this.formData.name){
+        this.showSpinner = true
         try {
           const response = await axios.get('http://localhost:5000/get-mangas', {
             params:{
@@ -75,6 +84,8 @@ export default {
           this.actualTitle = this.formData.name
         } catch (error) {
           console.error(error);
+        } finally {
+          this.showSpinner = false
         }
       }
     }
