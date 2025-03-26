@@ -1,5 +1,6 @@
 <template>
   <div class="content" id="mangaInfo">
+      <SpinnerMain :show="showSpinner" text="Buscando os capítulos..."/>
       <ul class="list">
         <li v-for="(volumes, index) in chapterList" :key="index" class="volume-item">
           <div class="title-space">
@@ -42,12 +43,18 @@
 </template>
 <script>
 import axios from 'axios'
+import SpinnerMain from '@/components/SpinnerMain.vue';
+
 export default {
   name: 'AboutUs',
   data() {
     return {
-      chapterList: []
+      chapterList: [],
+      showSpinner: false
     }
+  },
+  components: {
+    SpinnerMain
   },
   props: {
     mangaId: String
@@ -55,6 +62,7 @@ export default {
   methods:{
     async searchMangaCharacters(){
       if(this.mangaId){
+        this.showSpinner = true
         try {
           const response = await axios.get('http://localhost:5000/get-manga-chapters', {
             params:{
@@ -65,6 +73,8 @@ export default {
           this.chapterList = response.data.data
         } catch (error) {
           console.error(error);
+        } finally {
+          this.showSpinner = false
         }
       }
     }
