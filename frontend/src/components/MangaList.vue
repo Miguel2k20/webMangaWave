@@ -43,4 +43,17 @@
     width: calc(33.33% - 10px);
     margin: 0 10px 10px 0;
 }
+@media (max-width: 1024px) {
+    .list-group .manga-item {
+        flex: 1 1 calc(50% - 10px); 
+        max-width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 600px) {
+    .list-group .manga-item {
+        flex: 1 1 100%; /* Um item por linha */
+        max-width: 100%;
+    }
+}
 </style>

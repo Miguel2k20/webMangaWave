@@ -85,6 +85,10 @@ export default {
     display: block;
     margin: 0 auto;
 }
+.item .imagem img{
+    width: 100%;
+    object-fit: cover;
+}
 
 .item .info {
     margin-top: 1rem;
@@ -100,4 +104,9 @@ export default {
     font-size: clamp(0.8rem, 2vw, 1rem);
     margin-top: 1rem;
 }
+/* @media (max-width: 1024px) {
+    .item .imagem {
+        width: ;
+    }
+} */
 </style>
