@@ -79,14 +79,24 @@ export default {
 }
 
 .item .imagem {
+    overflow: hidden;
+    border-radius: 15px;
     width: 100%;
     max-width: 250px;
     object-fit: cover;
     display: block;
     margin: 0 auto;
+    transition: all 0.8s ease;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0);
 }
+.item .imagem:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .item .imagem img{
+    display: block;
     width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 

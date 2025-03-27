@@ -1,14 +1,14 @@
 <template>
   <div class="content" id="search-mangas">
-    <SpinnerMain :show="showSpinner" text="Buscando o manga..."/>
+    <SpinnerMain :show="showSpinner" text="Buscando o manga..." />
     <div class="session search">
       <div class="logo">
         <a href="/">
-          <img src="../assets/imagens/logo.png" alt="">
+          <img src="../assets/imagens/logo.png" alt="" />
         </a>
       </div>
       <form action="" class="form-space" @submit.prevent="searchNew">
-        <input v-model="formData.name" placeholder="O que você está procurando" type="text">
+        <input v-model="formData.name" placeholder="O que você está procurando" type="text" />
         <button type="submit">
           <span class="pi pi-search"></span>
         </button>
@@ -16,81 +16,103 @@
     </div>
     <div class="session list">
       <div class="title-spance">
-        <h2 class="title"><b>R</b>esultado para: <span>{{ actualTitle }}</span></h2>
+        <h2 class="title">
+          <b>R</b>esultado para: <span>{{ actualTitle }}</span>
+        </h2>
         <h4 class="sub-title">{{ resultCount }} resultados encontrados</h4>
       </div>
     </div>
     <div class="session manga-list">
       <MangaList :list="mangaList" />
     </div>
+    <Pagination
+      :total="total"
+      :limit="limit"
+      :current-page="currentPage"
+      @change-page="handlePageChange"
+    />
   </div>
 </template>
+
 <script>
-import axios from 'axios'
+import axios from 'axios';
 import MangaList from '../components/MangaList.vue';
 import SpinnerMain from '@/components/SpinnerMain.vue';
+import Pagination from '@/components/Pagination.vue'; // Importe o componente
+
 export default {
   name: 'SearchMangas',
   props: {
-    mangaName: String
+    mangaName: String,
   },
   components: {
     MangaList,
-    SpinnerMain
+    SpinnerMain,
+    Pagination, 
   },
   data() {
     return {
       formData: {
-        name: ""
+        name: '',
       },
-      actualTitle: "",
+      actualTitle: '',
       resultCount: 0,
       mangaList: [],
-      showSpinner: false
-    }
+      showSpinner: false,
+      limit: 25,
+      offset: 0,
+      total: 0,
+      currentPage: 1,
+    };
   },
   created() {
     if (this.mangaName) {
       this.formData.name = this.mangaName;
       this.actualTitle = this.mangaName;
     }
-    this.searchMangas()
-  },
-  mounted() {
-
+    this.searchMangas();
   },
   methods: {
     searchNew() {
-      if (this.formData.name && this.formData.name != this.actualTitle) { 
+      if (this.formData.name && this.formData.name !== this.actualTitle) {
         this.$router.push({
           path: '/search-mangas',
-          query: { manga: this.formData.name }
+          query: { manga: this.formData.name },
         });
-        this.searchMangas()
+        this.offset = 0;
+        this.currentPage = 1;
+        this.searchMangas();
       }
     },
     async searchMangas() {
-      if(this.formData.name){
-        this.showSpinner = true
+      if (this.formData.name) {
+        this.showSpinner = true;
         try {
           const response = await axios.get('http://localhost:5000/get-mangas', {
-            params:{
+            params: {
               manga: this.formData.name,
-              offset: 0,
-            }
+              offset: this.offset,
+              limit: this.limit,
+            },
           });
-          this.mangaList =  Object.entries(response.data.data)
-          this.resultCount = response.data.total
-          this.actualTitle = this.formData.name
+          this.mangaList = Object.entries(response.data.data);
+          this.resultCount = response.data.total;
+          this.total = response.data.total;
+          this.actualTitle = this.formData.name;
         } catch (error) {
           console.error(error);
         } finally {
-          this.showSpinner = false
+          this.showSpinner = false;
         }
       }
-    }
-  }
-}
+    },
+    handlePageChange(page) {
+      this.currentPage = page;
+      this.offset = (this.currentPage - 1) * this.limit;
+      this.searchMangas();
+    },
+  },
+};
 </script>
 
 <style>

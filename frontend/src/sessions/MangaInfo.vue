@@ -1,88 +1,104 @@
 <template>
   <div class="content" id="mangaInfo">
-      <SpinnerMain :show="showSpinner" text="Buscando os capítulos..."/>
-      <ul class="list">
-        <li v-for="(volumes, index) in chapterList" :key="index" class="volume-item">
-          <div class="title-space">
-            <h4 class="volume-title">
-              <b>V</b>olume: {{ index }}
-            </h4>
-            <div class="buttons">
-              <a href="">
-                <i class="pi pi-file-pdf"></i>
-              </a>
-              <a href="">
-                <i class="pi pi-amazon"></i>
-              </a>
-            </div>
+    <SpinnerMain :show="showSpinner" text="Buscando os capítulos..." />
+    <ul class="list">
+      <li v-for="(volumes, index) in chapterList" :key="index" class="volume-item">
+        <div class="title-space">
+          <h4 class="volume-title">
+            <b>V</b>olume: {{ index }}
+          </h4>
+          <div class="buttons">
+            <a href="">
+              <i class="pi pi-file-pdf"></i>
+            </a>
+            <a href="">
+              <i class="pi pi-amazon"></i>
+            </a>
           </div>
-          <div href="" class="chapter-item" v-for="chapter in volumes" :key="chapter" >
-            <div class="manga-info">
-              <h5 class="chapter-sub-title">
-                Capitulo: {{ chapter.attributes.chapter }}
-              </h5>
-              <h5 class="chapter-title">
-                {{ chapter.attributes.title }}
-              </h5>
-              <span class="moreinfo">
-                Paginas: {{ chapter.attributes.pages }}
-              </span>
-            </div>
-            <div class="buttons">
-              <a :href="chapter.id">
-                <i class="pi pi-file-pdf"></i>
-              </a>
-              <a :href="chapter.id">
-                <i class="pi pi-amazon"></i>
-              </a>
-            </div>
+        </div>
+        <div href="" class="chapter-item" v-for="chapter in volumes" :key="chapter.id">
+          <div class="manga-info">
+            <h5 class="chapter-sub-title">
+              Título: {{ chapter.attributes.title ?? 'Sem título' }}
+            </h5>
+            <h5 class="chapter-title">
+              Capítulo: {{ chapter.attributes.chapter }}
+            </h5>
+            <span class="moreinfo"> Páginas: {{ chapter.attributes.pages }} </span>
           </div>
-        </li>
-      </ul>
-   </div>
+          <div class="buttons">
+            <a :href="chapter.id">
+              <i class="pi pi-file-pdf"></i>
+            </a>
+            <a :href="chapter.id">
+              <i class="pi pi-amazon"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <Pagination
+      :total="total"
+      :limit="limit"
+      :current-page="currentPage"
+      @change-page="handlePageChange"
+    />
+  </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
 import SpinnerMain from '@/components/SpinnerMain.vue';
+import Pagination from '@/components/Pagination.vue'; 
 
 export default {
-  name: 'AboutUs',
+  name: 'MangaInfo',
+  props: {
+    mangaId: String,
+  },
+  components: {
+    SpinnerMain,
+    Pagination, 
+  },
   data() {
     return {
       chapterList: [],
-      showSpinner: false
-    }
+      showSpinner: false,
+      limit: 100,
+      offset: 0, 
+      currentPage: 1, 
+    };
   },
-  components: {
-    SpinnerMain
+  mounted() {
+    this.searchMangaChapters();
   },
-  props: {
-    mangaId: String
-  },
-  methods:{
-    async searchMangaCharacters(){
-      if(this.mangaId){
-        this.showSpinner = true
+  methods: {
+    async searchMangaChapters() {
+      if (this.mangaId) {
+        this.showSpinner = true;
         try {
           const response = await axios.get('http://localhost:5000/get-manga-chapters', {
-            params:{
+            params: {
               idManga: this.mangaId,
-              offset: 0,
-            }
+              offset: this.offset,
+              limit: this.limit,
+            },
           });
-          this.chapterList = response.data.data
+          this.chapterList = response.data.data; 
+          this.total = response.data.total || 0; 
         } catch (error) {
           console.error(error);
         } finally {
-          this.showSpinner = false
+          this.showSpinner = false;
         }
       }
-    }
+    },
+    handlePageChange(page) {
+      this.currentPage = page;
+      this.offset = (this.currentPage - 1) * this.limit;
+      this.searchMangaChapters();
+    },
   },
-  mounted() {
-    this.searchMangaCharacters()
-	}
-}
+};
 </script>
 
 <style>
