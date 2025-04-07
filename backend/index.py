@@ -33,6 +33,16 @@ def getMangaChapters():
     result = MangaApiClient.getMangaList(idManga, offset)
     return jsonify(result)
 
+@app.route('/pdf-manga-chapter')
+def pdfDownloadMangaChapters():
+    idManga = request.args.get('idManga')
+        
+    if not idManga:
+        return {"error": "Mangá não especificado"}, 404
+    
+    result = CreateFile.pdfGenerator(idManga)
+    return jsonify(result)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
     

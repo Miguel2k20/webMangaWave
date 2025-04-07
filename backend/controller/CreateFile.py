@@ -43,9 +43,15 @@ class CreateFile:
         return True
 
     @staticmethod
-    def pdfGenerator(mangaObject):
+    def pdfGenerator(mangaId):
 
-        diretory = mangaObject['diretory']
+        diretory_temp = "manga_temp_cache"
+        diretory = "manga_cache"
+
+        # CreateFile.downloadMangasPages(diretory_temp, mangaId)
+        urlList = MangaApiClient.getMangasPages(mangaId)
+        
+        return "Ain pai para"
 
         mangaDirectory = os.path.join(desktop_path, diretory) 
 
@@ -75,7 +81,6 @@ class CreateFile:
         
         pdfFilePath = os.path.join(pdf_output_directory, pdf_name)
 
-        # Preciso resolver o erro aqui
         filesManga = sorted(
             [f for f in os.listdir(mangaDirectory) if os.path.isfile(os.path.join(mangaDirectory, f))],
             key=lambda x: int(x.split("-")[1].split(".")[0])

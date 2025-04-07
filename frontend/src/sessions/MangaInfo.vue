@@ -27,7 +27,7 @@
             <span class="moreinfo"> Páginas: {{ chapter.attributes.pages }} </span>
           </div>
           <div class="buttons">
-            <a :href="chapter.id">
+            <a @click.prevent="downloadChapterPdf(chapter.id)" href="/"> 
               <i class="pi pi-file-pdf"></i>
             </a>
             <a :href="chapter.id">
@@ -97,6 +97,23 @@ export default {
       this.offset = (this.currentPage - 1) * this.limit;
       this.searchMangaChapters();
     },
+    downloadChapterPdf (idmanga) {
+      if (idmanga) {
+        this.showSpinner = true;
+        try {
+          const response = axios.get('http://localhost:5000/pdf-manga-chapter', {
+            params: {
+              idManga: idmanga,
+            },
+          });
+          console.log(response)
+        } catch (error) {
+          console.error(error);
+        } finally {
+          this.showSpinner = false;
+        }
+      }
+    }
   },
 };
 </script>

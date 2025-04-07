@@ -97,7 +97,6 @@ class Helpers:
         
         return pagesArray
     
-    # Feito pra criar uma string contendo um diretorio para armazenar os mangás
     @staticmethod
     def diretoryCreate(mangalist):
         mangalist = mangalist.json()
@@ -112,8 +111,8 @@ class Helpers:
         mangatitle = re.sub(r'[^a-z0-9\s]', '', mangatitle)
 
         for manga in mangalist["data"]:
-            manga["diretory"] = f"MangaWave/{mangatitle}/volume{manga['attributes']['volume']}/chapter{manga['attributes']['chapter']}/language-{manga['attributes']['translatedLanguage']}"
-            manga["diretory_temp"] = f"MangaWave/temp/{mangatitle}/volume{manga['attributes']['volume']}/chapter{manga['attributes']['chapter']}/language-{manga['attributes']['translatedLanguage']}"
+            manga["diretory"] = f"manga_cache/{mangatitle}/volume{manga['attributes']['volume']}/chapter{manga['attributes']['chapter']}/language-{manga['attributes']['translatedLanguage']}"
+            manga["diretory_temp"] = f"manga_temp_cache/{mangatitle}/volume{manga['attributes']['volume']}/chapter{manga['attributes']['chapter']}/language-{manga['attributes']['translatedLanguage']}"
         
         return mangalist
     
