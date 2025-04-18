@@ -2,15 +2,16 @@ services:
   backend:
     build: ./backend
     ports:
-      - "5000:5000"
+      - "5000:80" # Porta interna do Apache é 80, não 5000
     volumes:
-      - ./backend:/app
-  frontend:
-    build: ./frontend
-    ports:
-      - "8080:80"
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    depends_on:
-      - backend
+      - ./backend/public:/var/www/html
+      - ./backend/.htaccess:/var/www/html/.htaccess
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
+  #   depends_on:
+  #     - backend

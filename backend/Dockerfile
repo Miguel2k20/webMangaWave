@@ -1,20 +1,10 @@
-# Usa a imagem base do Python
-FROM python:3.12-slim
+FROM php:8.2-apache
 
-# Define o diretório de trabalho
-WORKDIR /app
+RUN docker-php-ext-install pdo pdo_mysql
+RUN a2enmod rewrite
 
-# Copia os arquivos de dependências
-COPY requirements.txt .
+COPY .htaccess /var/www/html/
+COPY ./public /var/www/html
+RUN sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
 
-# Instala as dependências
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copia o restante do código do backend
-COPY . .
-
-# Expõe a porta que o backend vai rodar (ex: 5000)
-EXPOSE 5000
-
-# Comando para rodar a aplicação Python
-CMD ["python", "index.py"]
+EXPOSE 80
